@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Vacancies</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333;">
+    <header style="text-align: center; padding: 20px;">
+        <h1 style="color: #4CAF50;">Search Vacancies</h1>
+    </header>
+
+    <section style="width: 80%; margin: auto;">
+        <article style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <form method="get" style="margin-bottom: 20px;">
+                <p>
+                    <label for="id_keyword" style="font-weight: bold;">Keyword:</label>
+                    <input type="text" name="keyword" maxlength="100" id="id_keyword" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 10px;">
+                </p>
+                <p>
+                    <label for="id_company" style="font-weight: bold;">Company:</label>
+                    <input type="text" name="company" maxlength="100" id="id_company" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 10px;">
+                </p>
+                <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Search</button>
+            </form>
+        </article>
+
+        <article style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <h2 style="color: #4CAF50; text-align: center;">Results</h2>
+            <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background-color: #4CAF50; color: white;">
+                        <th style="padding: 10px;">Title</th>
+                        <th style="padding: 10px;">Company</th>
+                        <th style="padding: 10px;">Description</th>
+                        <th style="padding: 10px;">Salary</th>
+                        <th style="padding: 10px;">Posted Date</th>
+                        <th style="padding: 10px;">Link</th>
+                        <th style="padding: 10px;">Job Format</th>
+                        <th style="padding: 10px;">Schedule</th>
+                        <th style="padding: 10px;">Skills</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vacancy in vacancies %}
+                    <tr>
+                        <td style="padding: 10px;">{{ vacancy.title }}</td>
+                        <td style="padding: 10px;">{{ vacancy.company }}</td>
+                        <td style="padding: 10px;">{{ vacancy.description }}</td>
+                        <td style="padding: 10px;">{{ vacancy.salary }}</td>
+                        <td style="padding: 10px;"><time>{{ vacancy.posted_date }}</time></td>
+                        <td style="padding: 10px;"><a href="{{ vacancy.link }}" target="_blank">View</a></td>
+                        <td style="padding: 10px;"><em>{{ vacancy.job_format.name }}</em></td>
+                        <td style="padding: 10px;">{{ vacancy.schedule }}</td>
+                        <td style="padding: 10px;">
+                            {% for skill in vacancy.skills.all %}
+                            {{ skill.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+    </section>
+</body>
+</html>

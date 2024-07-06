@@ -1,0 +1,19 @@
+<!-- application/templates/search.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Vacancies</title>
+</head>
+<body>
+    <h1>Search Vacancies</h1>
+    <form method="GET" action="{% url 'search_vacancies_view' %}">
+        <input type="text" name="q" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for vacancy in vacancies %}
+        <li>{{ vacancy.title }} at {{ vacancy.company }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vacancy Statistics</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333;">
+    <header style="text-align: center; padding: 20px;">
+        <h1 style="color: #4CAF50;">Vacancy Statistics</h1>
+    </header>
+
+    <section style="width: 80%; margin: auto;">
+        <article style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <h2 style="color: #4CAF50;">Overview</h2>
+            <p>Total Vacancies: <strong>{{ total_vacancies }}</strong></p>
+            <p>Total Skills: <strong>{{ total_skills }}</strong></p>
+        </article>
+
+        <article style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-top: 20px;">
+            <h2 style="color: #4CAF50;">Vacancies per Company</h2>
+            <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background-color: #4CAF50; color: white;">
+                        <th style="padding: 10px;">Company</th>
+                        <th style="padding: 10px;">Vacancies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in vacancies_per_company %}
+                    <tr>
+                        <td style="padding: 10px;">{{ company.company }}</td>
+                        <td style="padding: 10px;">{{ company.total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+
+        <article style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-top: 20px;">
+            <h2 style="color: #4CAF50;">Vacancies per Job Format</h2>
+            <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background-color: #4CAF50; color: white;">
+                        <th style="padding: 10px;">Job Format</th>
+                        <th style="padding: 10px;">Vacancies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job_format in vacancies_per_job_format %}
+                    <tr>
+                        <td style="padding: 10px;">{{ job_format.job_format__name }}</td>
+                        <td style="padding: 10px;">{{ job_format.total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+    </section>
+</body>
+</html>
